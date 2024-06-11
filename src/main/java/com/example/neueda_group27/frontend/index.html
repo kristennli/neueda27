@@ -1,15 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Credit Card List</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-    <h1>Credit Card List</h1>
-    <div id="credit-card-list"></div>
 
+<body>
+    <div id="credit-card-list"></div>
+    <div class="container">
+        <h1>Credit Card</h1>
+        <form id="creditCardForm">
+            <div class="form-group">
+                <label for="cardNumber">Card Number</label>
+                <input type="text" id="cardNumber" name="cardNumber" required>
+            </div>
+            <div class="form-group">
+                <label for="expiryDate">Expiration Date</label>
+                <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY" required>
+            </div>
+            <div class="form-group">
+                <label for="cvv">CVV</label>
+                <input type="text" id="cvv" name="cvv" required>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+        <div id="response"></div>
+    </div>
     <script src="app.js"></script>
 </body>
+
 </html>
