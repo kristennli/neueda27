@@ -1,14 +1,15 @@
 package com.example.neueda_group27.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+// import jakarta.persistence.GeneratedValue;
+// import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "CREDIT_CARD")
 public class CreditCard {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String cardNumber;
     private String cardHolderName;
     private String expiryDate;
@@ -17,6 +18,11 @@ public class CreditCard {
     private double balance;
     private int zipcode;
 
+    // Default constructor
+    public CreditCard() {
+    }
+
+    // Parameterized constructor
     public CreditCard(String cardNumber, String cardHolderName, String expiryDate, int cvv, double creditLimit, double balance, int zipcode) {
         this.cardNumber = cardNumber;
         this.cardHolderName = cardHolderName;
