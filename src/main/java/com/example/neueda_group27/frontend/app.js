@@ -7,14 +7,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const actionForms = document.getElementById('actionForms');
     const balanceResult = document.getElementById('balanceResult');
 
+    let cardNumber, cardHolderName, expiryDate, cvv, zipcode
+
     accountForm.addEventListener('submit', function (event) {
         event.preventDefault();
 
-        const cardNumber = document.getElementById('cardNumber').value;
-        const cardHolderName = document.getElementById('cardHolderName').value;
-        const expiryDate = document.getElementById('expiryDate').value;
-        const cvv = document.getElementById('cvv').value;
-        const zipcode = document.getElementById('zipcode').value;
+      const cardNumber = document.getElementById('cardNumber').value;
+      const cardHolderName = document.getElementById('cardHolderName').value;
+      const expiryDate = document.getElementById('expiryDate').value;
+      const  cvv = document.getElementById('cvv').value;
+      const zipcode = document.getElementById('zipcode').value;
 
         fetch('http://localhost:8080/api/creditcards/checkAccount', {
             method: 'POST',
@@ -40,12 +42,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     checkBalanceBtn.addEventListener('click', function () {
-        fetch('http://localhost:8080/api/creditcards', {
-            method: 'POST',
+        fetch(`http://localhost:8080/api/creditcards/checkBalance?cardNumber=${cardNumber}&cardHolderName=${cardHolderName}&expiryDate=${expiryDate}&cvv=${cvv}&zipcode=${zipcode}`, {
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
-            body: `cardNumber=${cardNumber.value}&cardHolderName=${cardHolderName.value}&expiryDate=${expiryDate.value}&cvv=${cvv.value}&zipcode=${zipcode.value}`
+            
         })
             .then(response => response.json())
             .then(data => {
@@ -70,12 +72,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const withdrawAmount = document.getElementById('withdrawAmount').value;
 
-        fetch('http://localhost:8080/api/creditcards/verify', {
+        fetch('http://localhost:8080/api/creditcards/withdraw', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
-            body: `cardNumber=${cardNumber.value}&cardHolderName=${cardHolderName.value}&expiryDate=${expiryDate.value}&cvv=${cvv.value}&zipcode=${zipcode.value}&amount=${withdrawAmount}`
+            body: `cardNumber=${cardNumber}&cardHolderName=${cardHolderName}&expiryDate=${expiryDate}&cvv=${cvv}&zipcode=${zipcode}&amount=${withdrawAmount}`
         })
             .then(response => response.json())
             .then(data => {
