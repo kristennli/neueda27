@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const actionForms = document.getElementById('actionForms');
     const balanceResult = document.getElementById('balanceResult');
 
-    let cardNumber, cardHolderName, expiryDate, cvv, zipcode
+    let cardNumber, cardHolderName, expiryDate, cvv, zipcode, balance;
 
     accountForm.addEventListener('submit', function (event) {
         event.preventDefault();
@@ -28,71 +28,61 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
+                    balance = data.balance;
                     accountResult.innerText = 'Account verified successfully!';
+                    alert('Account verified successfully!')
                     document.getElementById('accountInfo').style.display = 'none';
                     document.getElementById('actions').style.display = 'block';
                 } else {
                     accountResult.innerText = 'Invalid account details. Please try again.';
+                    alert('Invalid account details. Please try again.')
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
                 accountResult.innerText = 'Error verifying account.';
+                alert('Error verifying account.')
             });
+
+        // use checkAccount to get balance
+        checkBalanceBtn.addEventListener('click', function () {
+            balanceResult.innerText = `Balance: $${balance !== undefined ? balance : 'N/A'}`;
+            balanceResult.style.display = 'block';
+            // withdrawForm.style.display = 'none';
+        });
     });
 
-    checkBalanceBtn.addEventListener('click', function () {
-        fetch(`http://localhost:8080/api/creditcards/checkBalance?cardNumber=${cardNumber}&cardHolderName=${cardHolderName}&expiryDate=${expiryDate}&cvv=${cvv}&zipcode=${zipcode}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            
-        })
-            .then(response => response.json())
-            .then(data => {
-                balanceResult.innerText = `Balance: $${data.balance}`;
-                balanceResult.style.display = 'block';
-                withdrawForm.style.display = 'none';
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                balanceResult.innerText = 'Error fetching balance.';
-                balanceResult.style.display = 'block';
-            });
-    });
+    // withdrawMoneyBtn.addEventListener('click', function () {
+    //     withdrawForm.style.display = 'block';
+    //     balanceResult.style.display = 'none';
+    // });
 
-    withdrawMoneyBtn.addEventListener('click', function () {
-        withdrawForm.style.display = 'block';
-        balanceResult.style.display = 'none';
-    });
+    // withdrawForm.addEventListener('submit', function (event) {
+    //     event.preventDefault();
 
-    withdrawForm.addEventListener('submit', function (event) {
-        event.preventDefault();
+    //     const withdrawAmount = document.getElementById('withdrawAmount').value;
 
-        const withdrawAmount = document.getElementById('withdrawAmount').value;
-
-        fetch('http://localhost:8080/api/creditcards/withdraw', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: `cardNumber=${cardNumber}&cardHolderName=${cardHolderName}&expiryDate=${expiryDate}&cvv=${cvv}&zipcode=${zipcode}&amount=${withdrawAmount}`
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    balanceResult.innerText = 'Withdrawal successful!';
-                } else {
-                    balanceResult.innerText = 'Withdrawal failed. Please try again.';
-                }
-                balanceResult.style.display = 'block';
-                withdrawForm.style.display = 'none';
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                balanceResult.innerText = 'Error processing withdrawal.';
-                balanceResult.style.display = 'block';
-            });
-    });
+    //     fetch('http://localhost:8080/api/creditcards/withdraw', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/x-www-form-urlencoded'
+    //         },
+    //         body: `cardNumber=${cardNumber}&cardHolderName=${cardHolderName}&expiryDate=${expiryDate}&cvv=${cvv}&zipcode=${zipcode}&amount=${withdrawAmount}`
+    //     })
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             if (data.success) {
+    //                 balanceResult.innerText = 'Withdrawal successful!';
+    //             } else {
+    //                 balanceResult.innerText = 'Withdrawal failed. Please try again.';
+    //             }
+    //             balanceResult.style.display = 'block';
+    //             withdrawForm.style.display = 'none';
+    //         })
+    //         .catch(error => {
+    //             console.error('Error:', error);
+    //             balanceResult.innerText = 'Error processing withdrawal.';
+    //             balanceResult.style.display = 'block';
+    //         });
+    // });
 });

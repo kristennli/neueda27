@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Credit Card</title>
+    <link rel="icon" href="data:,"> <!-- Suppress the favicon request -->
+    <script src="app.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -33,18 +35,17 @@
         <div id="actions" style="display:none;">
             <h2>Select Action</h2>
             <button id="checkBalanceBtn">Check Account Balance</button>
-            <button id="withdrawMoneyBtn">Withdraw Money</button>
+            <div id="balanceResult"></div>
+            <!-- <button id="withdrawMoneyBtn">Withdraw Money</button>
             <div id="actionForms" style="display:none;">
                 <form id="withdrawForm" style="display:none;">
                     <label for="withdrawAmount">Amount to Withdraw</label>
                     <input type="text" id="withdrawAmount" name="withdrawAmount" required>
                     <button type="submit">Withdraw</button>
                 </form>
-                <div id="balanceResult" style="display:none;"></div>
-            </div>
+            </div> -->
         </div>
     </div>
-    <script src="scripts.js"></script>
 </body>
 
 </html>
