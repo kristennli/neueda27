@@ -6,13 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Credit Card</title>
     <link rel="icon" href="data:,"> <!-- Suppress the favicon request -->
-    <script src="app.js"></script>
+    
+    <!-- Toastify CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
     <div class="container">
-        <h1>Credit Card</h1>
+        <h1>Credit Card test</h1>
 
         <div id="accountInfo">
             <h2>Enter Account Information</h2>
@@ -29,23 +32,19 @@
                 <input type="text" id="zipcode" name="zipcode" required>
                 <button type="submit">Verify Account</button>
             </form>
-            <div id="accountResult"></div>
         </div>
 
         <div id="actions" style="display:none;">
             <h2>Select Action</h2>
             <button id="checkBalanceBtn">Check Account Balance</button>
             <div id="balanceResult"></div>
-            <!-- <button id="withdrawMoneyBtn">Withdraw Money</button>
-            <div id="actionForms" style="display:none;">
-                <form id="withdrawForm" style="display:none;">
-                    <label for="withdrawAmount">Amount to Withdraw</label>
-                    <input type="text" id="withdrawAmount" name="withdrawAmount" required>
-                    <button type="submit">Withdraw</button>
-                </form>
-            </div> -->
         </div>
     </div>
+
+    <!-- Toastify JS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    
+    <script src="app.js"></script>
 </body>
 
 </html>
