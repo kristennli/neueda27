@@ -28,10 +28,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 balance = data.balance;
                 Toastify({
                     text: 'Account verified successfully!',
-                    duration: 3000,
+                    duration: 5000,
                     close: true,
                     gravity: 'top',
-                    position: 'right',
+                    position: 'middle',
+                    closeOnClick: true,
                     backgroundColor: 'linear-gradient(to right, #00b09b, #96c93d)',
                 }).showToast();
 
@@ -40,10 +41,11 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 Toastify({
                     text: 'Invalid account details. Please try again.',
-                    duration: 3000,
+                    duration: 5000,
                     close: true,
                     gravity: 'top',
-                    position: 'right',
+                    position: 'middle',
+                    closeOnClick: true,
                     backgroundColor: 'linear-gradient(to right, #ff0000, #ff5f6d)',
                 }).showToast();
             }
